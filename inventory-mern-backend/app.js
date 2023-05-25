@@ -1,6 +1,6 @@
 // Basic Lib Import
 const express =require('express');
-//const router =require('./src/routes/api');
+const router =require('./src/routes/api');
 const app= new express();
 const bodyParser =require('body-parser');
 
@@ -51,7 +51,7 @@ mongoose.connect(URI, OPTIONS)
 
 
 // Routing Implement
-//app.use("/api/v1",router)
+app.use("/api/v1",router)
 
 // Undefined Route Implement
 app.use("*",(req,res)=>{
