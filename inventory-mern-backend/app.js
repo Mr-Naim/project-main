@@ -42,7 +42,7 @@ const OPTIONS = {
 
 mongoose.connect(URI, OPTIONS)
   .then(() => {
-    console.log('Connection Success');
+    console.log('DB Connection Success');
   })
   .catch((error) => {
     console.log('Connection Error:');

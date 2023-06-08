@@ -8,9 +8,11 @@ class SessionHelper{
     setUserDetails(UserDetails){
         localStorage.setItem("UserDetails",JSON.stringify(UserDetails))
     }
+
     getUserDetails(){
         return JSON.parse(localStorage.getItem("UserDetails"))
     }
+
     setEmail(Email){
         localStorage.setItem("Email",Email)
     }

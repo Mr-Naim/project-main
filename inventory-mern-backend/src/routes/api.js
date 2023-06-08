@@ -8,14 +8,14 @@ const SuppliersController = require("../controllers/Suppliers/SuppliersControlle
 
 const ExpenseTypesController = require("../controllers/Expenses/ExpenseTypesController");
 const ExpensesController = require("../controllers/Expenses/ExpensesController");
-/*
+
 const ProductsController = require("../controllers/Products/ProductsController");
 const PurchasesController = require("../controllers/Purchases/PurchasesController");
 const SalesController = require("../controllers/Sales/SalesController");
 const ReturnsController = require("../controllers/Returns/ReturnsController");
 const ReportController = require("../controllers/Report/ReportController");
 const SummaryController = require("../controllers/Summary/SummaryController");
-*/
+
 const router =express.Router();
 
 
@@ -83,7 +83,7 @@ router.get("/ExpensesList/:pageNo/:perPage/:searchKeyword",AuthVerifyMiddleware,
 router.get("/DeleteExpense/:id",AuthVerifyMiddleware,ExpensesController.DeleteExpense);
 router.get("/ExpenseDetailsByID/:id",AuthVerifyMiddleware,ExpensesController.ExpenseDetailsByID);
 
-/*
+
 // Products
 router.post("/CreateProducts",AuthVerifyMiddleware,ProductsController.CreateProducts);
 router.post("/UpdateProducts/:id",AuthVerifyMiddleware,ProductsController.UpdateProducts);
@@ -123,7 +123,7 @@ router.get("/ExpensesSummary",AuthVerifyMiddleware,SummaryController.ExpensesSum
 router.get("/ReturnSummary",AuthVerifyMiddleware,SummaryController.ReturnSummary);
 router.get("/PurchaseSummary",AuthVerifyMiddleware,SummaryController.PurchaseSummary);
 router.get("/SalesSummary",AuthVerifyMiddleware,SummaryController.SalesSummary);
-*/
+
 
 module.exports=router;
 
