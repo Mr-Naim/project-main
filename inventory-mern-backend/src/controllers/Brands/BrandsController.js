@@ -1,5 +1,5 @@
 const DataModel = require("../../models/Brands/BrandsModel");
-//const ProductsModel = require("../../models/Products/ProductsModel");
+const ProductsModel = require("../../models/Products/ProductsModel");
 const CreateService = require("../../services/common/CreateService");
 const UpdateService = require("../../services/common/UpdateService");
 const ListService = require("../../services/common/ListService");

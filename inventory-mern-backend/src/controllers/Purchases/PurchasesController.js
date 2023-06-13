@@ -18,9 +18,9 @@ exports.PurchasesList=async (req, res) => {
     res.status(200).json(Result)
 }
 
-exports.PurchasesDelete=async (req, res) => {
-    let Result=await  DeleteParentChildsService(req,ParentModel,ChildsModel,'PurchaseID')
-    res.status(200).json(Result)
+exports.PurchasesDelete = async (req, res) => {
+    let Result = await DeleteParentChildsService(req, res, ParentModel, ChildsModel, 'PurchaseID');
+    res.status(200).json(Result);
 }
 
 

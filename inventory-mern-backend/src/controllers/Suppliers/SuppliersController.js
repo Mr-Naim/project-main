@@ -5,7 +5,7 @@ const ListService = require("../../services/common/ListService");
 const DropDownService = require("../../services/common/DropDownService");
 const mongoose = require("mongoose");
 const CheckAssociateService = require("../../services/common/CheckAssociateService");
-//const PurchasesModel = require("../../models/Purchases/PurchasesModel");
+const PurchasesModel = require("../../models/Purchases/PurchasesModel");
 const DeleteService = require("../../services/common/DeleteService");
 const DetailsByIDService = require("../../services/common/DetailsByIDService");
 
@@ -42,7 +42,7 @@ exports.SuppliersDetailsByID=async (req, res) => {
 exports.DeleteSupplier=async (req, res) => {
     let DeleteID=req.params.id;
     const ObjectId = mongoose.Types.ObjectId;
-    let CheckAssociate= await CheckAssociateService({SupplierID:ObjectId(DeleteID)},PurchasesModel);
+    let CheckAssociate= await CheckAssociateService({SupplierID: new ObjectId(DeleteID)},PurchasesModel);
     if(CheckAssociate){
         res.status(200).json({status: "associate", data: "Associate with Purchases"})
     }
