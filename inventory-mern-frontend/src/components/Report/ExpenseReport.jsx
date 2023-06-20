@@ -23,22 +23,23 @@ const ExpenseReport = () => {
         }
     }
 
-    const OnExport = (exportType,data) => {
-        const fileName = 'ExpenseReport'
-        if(data.length>0){
-            let ReportData=[]
-            data.map((item)=>{
-                let listItem={
-                    "Amount":item['Amount'],
-                    "Note":item['Note'],
-                    "Category":item['Type'][0]['Name'],
-                    "Date":moment(item['CreatedDate']).format('MMMM Do YYYY')
-                }
-                ReportData.push(listItem)
-            })
-            exportFromJSON({data: ReportData, fileName: fileName, exportType: exportType })
+    const OnExport = (exportType, data) => {
+        const fileName = 'ExpenseReport';
+        if (data.length > 0) {
+          let ReportData = [];
+          data.map((item) => {
+            let listItem = {
+              "Amount": item['Amount'],
+              "Note": item['Note'],
+              "Category": item['Type'] && item['Type'][0] && item['Type'][0]['Name'] ? item['Type'][0]['Name'] : 'N/A',
+              "Date": moment(item['CreatedDate']).format('MMMM Do YYYY')
+            };
+            ReportData.push(listItem);
+          });
+          exportFromJSON({ data: ReportData, fileName: fileName, exportType: exportType });
         }
-    }
+      };
+      
 
     return (
         <div className="container-fluid">
