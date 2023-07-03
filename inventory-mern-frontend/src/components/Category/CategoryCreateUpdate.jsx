@@ -8,7 +8,6 @@ import {OnChangeCategoryInput} from "../../redux/state-slice/category-slice";
 
 const CategoryCreateUpdate = () => {
 
-
     let FormValue=useSelector((state)=>(state.category.FormValue));
     let navigate=useNavigate();
     let [ObjectID,SetObjectID]=useState(0);

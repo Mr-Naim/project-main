@@ -39,18 +39,22 @@ exports.SuppliersDetailsByID=async (req, res) => {
 
 
 
-exports.DeleteSupplier=async (req, res) => {
-    let DeleteID=req.params.id;
-    const ObjectId = mongoose.Types.ObjectId;
-    let CheckAssociate= await CheckAssociateService({SupplierID: new ObjectId(DeleteID)},PurchasesModel);
-    if(CheckAssociate){
-        res.status(200).json({status: "associate", data: "Associate with Purchases"})
+exports.DeleteSupplier = async (req, res) => {
+    try {
+      const DeleteID = req.params.id;
+      const ObjectId = mongoose.Types.ObjectId;
+       const CheckAssociate = await CheckAssociateService({ SupplierID: new ObjectId(DeleteID) }, PurchasesModel);
+       if (CheckAssociate) {
+        res.status(200).json({ status: "associate", data: "Associate with Purchases" });
+      } else {
+        const Result = await DeleteService(req, DataModel);
+        res.status(200).json(Result);
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-    else{
-        let Result=await DeleteService(req,DataModel);
-        res.status(200).json(Result)
-    }
-}
+  };
 
 
 

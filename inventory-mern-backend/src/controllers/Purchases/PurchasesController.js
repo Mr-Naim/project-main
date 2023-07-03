@@ -19,8 +19,12 @@ exports.PurchasesList=async (req, res) => {
 }
 
 exports.PurchasesDelete = async (req, res) => {
-    let Result = await DeleteParentChildsService(req, res, ParentModel, ChildsModel, 'PurchaseID');
-    res.status(200).json(Result);
-}
+    try {
+      let Result = await DeleteParentChildsService(req, res, ParentModel, ChildsModel, 'PurchaseID');
+      res.status(200).json(Result);
+    } catch (error) {
+      res.status(500).json({ status: "error", message: "Internal Server Error" });
+    }
+  }
 
 

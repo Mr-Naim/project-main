@@ -1,6 +1,10 @@
 import React,{Fragment} from 'react';
 import {getToken} from "./helper/SessionHelper";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+
+import { toast, ToastContainer, Slide, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import Page404 from "./pages/NotFound/Page404";
 import FullscreenLoader from "./components/MasterLayout/FullscreenLoader";
@@ -35,6 +39,17 @@ import SupplierCreateUpdatePage from "./pages/Supplier/SupplierCreateUpdatePage"
 import SupplierListPage from "./pages/Supplier/SupplierListPage";
 import ExpenseTypeList from "./components/ExpenseType/ExpenseTypeList";
 import ExpenseTypeListPage from "./pages/ExpenseType/ExpenseTypeListPage";
+
+// toast options configure 
+/*toast.configure({
+  position: 'bottom-right',
+  transition: Slide,
+  autoClose: 3000,
+  pauseOnHover: true,
+  limit: 3,
+});
+*/;
+
 const App = () => {
     const getToken = () => {
       // Get the token from the localStorage
@@ -95,6 +110,7 @@ const App = () => {
             </Routes>
           </BrowserRouter>
           <FullscreenLoader />
+          <ToastContainer transition={Flip} />
         </Fragment>
       );
     } else {

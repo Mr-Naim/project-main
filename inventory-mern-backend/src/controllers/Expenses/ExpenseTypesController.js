@@ -37,16 +37,19 @@ exports.ExpenseTypesDetailsByID=async (req, res) => {
 }
 
 
-exports.DeleteExpenseTypes=async (req, res) => {
-    let DeleteID=req.params.id;
-    const ObjectId = mongoose.Types.ObjectId;
-    let CheckAssociate= await CheckAssociateService({TypeID:ObjectId(DeleteID)},ExpensesModel);
-    if(CheckAssociate){
-        res.status(200).json({status: "associate", data: "Associate with Expenses"})
+exports.DeleteExpenseTypes = async (req, res) => {
+    try {
+      const DeleteID = req.params.id;
+      const ObjectId = mongoose.Types.ObjectId;
+      const isAssociated = await CheckAssociateService({ TypeID: ObjectId(DeleteID) }, ExpensesModel);
+       if (isAssociated) {
+        res.status(200).json({ status: "associate", data: "Associated with Expenses" });
+      } else {
+        const result = await DeleteService(req, DataModel);
+        res.status(200).json(result);
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
     }
-    else{
-        let Result=await DeleteService(req,DataModel);
-        res.status(200).json(Result)
-    }
-}
+  }
 

@@ -40,18 +40,21 @@ exports.CategoriesDetailsByID=async (req, res) => {
 }
 
 
-exports.DeleteCategories=async (req, res) => {
-    let DeleteID=req.params.id;
-    const ObjectId = mongoose.Types.ObjectId;
-    let CheckAssociate= await CheckAssociateService({CategoryID:ObjectId(DeleteID)},ProductsModel);
-    if(CheckAssociate){
-        res.status(200).json({status: "associate", data: "Associate with Product"})
+exports.DeleteCategories = async (req, res) => {
+    try {
+      const DeleteID = req.params.id;
+      const ObjectId = mongoose.Types.ObjectId;
+       const CheckAssociate = await CheckAssociateService({ CategoryID: ObjectId(DeleteID) }, ProductsModel);
+      if (CheckAssociate) {
+        return res.status(200).json({ status: "associate", data: "Associate with Product" });
+      }
+       const Result = await DeleteService(req, DataModel);
+      return res.status(200).json(Result);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Internal Server Error" });
     }
-    else{
-        let Result=await DeleteService(req,DataModel);
-        res.status(200).json(Result)
-    }
-}
+  }
 
 
 

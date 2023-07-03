@@ -36,18 +36,21 @@ exports.CustomersDetailsByID=async (req, res) => {
     res.status(200).json(Result)
 }
 
-exports.DeleteCustomer=async (req, res) => {
-    let DeleteID=req.params.id;
-    const ObjectId = mongoose.Types.ObjectId;
-    let CheckAssociate= await CheckAssociateService({CustomerID: new ObjectId(DeleteID)},SalesModel);
-    if(CheckAssociate){
-        res.status(200).json({status: "associate", data: "Associate with Sales"})
+ exports.DeleteCustomer = async (req, res) => {
+    try {
+        const DeleteID = req.params.id;
+        const ObjectId = mongoose.Types.ObjectId;
+         // Assuming CheckAssociateService and DeleteService are defined elsewhere
+        let CheckAssociate = await CheckAssociateService({ CustomerID: new ObjectId(DeleteID) }, SalesModel);
+         if (CheckAssociate) {
+            res.status(200).json({ status: "associate", data: "Associate with Sales" });
+        } else {
+            let Result = await DeleteService(req, DataModel);
+            res.status(200).json(Result);
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
     }
-    else{
-        let Result=await DeleteService(req,DataModel);
-        res.status(200).json(Result)
-    }
-}
-
+};
 
 

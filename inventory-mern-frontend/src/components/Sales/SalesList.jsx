@@ -44,9 +44,12 @@ const SalesList = () => {
             row.style.display = (row.innerText.includes(e.target.value)) ? '' : 'none'
         })
     }
-    const DetailsPopUp = (item) => {
 
-    }
+
+   const DetailsPopUp = (item) => {
+
+   };
+
     return (
       <Fragment>
         <div className="container-fluid my-5">
@@ -254,6 +257,8 @@ const SalesList = () => {
             </div>
           </div>
         </div>
+        
+
       </Fragment>
     );
 };

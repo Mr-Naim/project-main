@@ -42,18 +42,22 @@ exports.BrandDropDown=async (req, res) => {
 }
 
 
-exports.DeleteBrand=async (req, res) => {
-   let DeleteID=req.params.id;
-   const ObjectId = mongoose.Types.ObjectId;
-   let CheckAssociate= await CheckAssociateService({BrandID:ObjectId(DeleteID)},ProductsModel);
-   if(CheckAssociate){
-       res.status(200).json({status: "associate", data: "Associate with Product"})
-   }
-   else{
-       let Result=await DeleteService(req,DataModel);
-       res.status(200).json(Result)
-   }
-}
+exports.DeleteBrand = async (req, res) => {
+    try {
+       const DeleteID = req.params.id;
+       const ObjectId = mongoose.Types.ObjectId;
+       const CheckAssociate = await CheckAssociateService({ BrandID: ObjectId(DeleteID) }, ProductsModel);
+        if (CheckAssociate) {
+          res.status(200).json({ status: "associate", data: "Associate with Product" });
+       } else {
+          const Result = await DeleteService(req, DataModel);
+          res.status(200).json(Result);
+       }
+    } catch (error) {
+       console.error(error);
+       res.status(500).json({ status: "error", message: "Internal Server Error" });
+    }
+ }
 
 
 

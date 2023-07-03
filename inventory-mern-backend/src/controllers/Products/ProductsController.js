@@ -38,31 +38,31 @@ exports.ProductsDetailsByID=async (req, res) => {
 }
 
 
-exports.DeleteProduct=async (req, res) => {
-    let DeleteID=req.params.id;
-    const ObjectId = mongoose.Types.ObjectId;
-
-    let CheckReturnAssociate= await CheckAssociateService({ProductID:ObjectId(DeleteID)},ReturnProductsModel);
-    let CheckPurchaseAssociate= await CheckAssociateService({ProductID:ObjectId(DeleteID)},PurchaseProductsModel);
-    let CheckSaleAssociate= await CheckAssociateService({ProductID:ObjectId(DeleteID)},SaleProductsModel);
-
-    if(CheckReturnAssociate){
-        res.status(200).json({status: "associate", data: "Associate with Return"})
+exports.DeleteProduct = async (req, res) => {
+    try {
+      const deleteId = req.params.id;
+      const ObjectId = mongoose.Types.ObjectId;
+       const checkAssociations = async (model) => {
+        return await CheckAssociateService({ ProductID: ObjectId(deleteId) }, model);
+      };
+       const checkReturnAssociate = await checkAssociations(ReturnProductsModel);
+      const checkPurchaseAssociate = await checkAssociations(PurchaseProductsModel);
+      const checkSaleAssociate = await checkAssociations(SaleProductsModel);
+       if (checkReturnAssociate) {
+        res.status(200).json({ status: "associate", data: "Associate with Return" });
+      } else if (checkPurchaseAssociate) {
+        res.status(200).json({ status: "associate", data: "Associate with Purchase" });
+      } else if (checkSaleAssociate) {
+        res.status(200).json({ status: "associate", data: "Associate with Sale" });
+      } else {
+        const result = await DeleteService(req, DataModel);
+        res.status(200).json(result);
+      }
+    } catch (error) {
+      res.status(500).json({ status: "error", message: "Internal Server Error" });
     }
-    else if(CheckPurchaseAssociate){
-        res.status(200).json({status: "associate", data: "Associate with Purchase"})
-    }
-    else if(CheckSaleAssociate){
-        res.status(200).json({status: "associate", data: "Associate with Sale"})
-    }
-    else{
-        let Result=await DeleteService(req,DataModel);
-        res.status(200).json(Result)
-    }
-}
-
-
-
+  };
+  
 exports.ProductsDropDown=async (req, res) => {
     let Result= await DropDownService(req,DataModel,{_id:1,Name:1})
     res.status(200).json(Result)

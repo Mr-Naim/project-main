@@ -29,9 +29,13 @@ exports.ExpenseDetailsByID=async (req, res) => {
 }
 
 
-exports.DeleteExpense=async (req, res) => {
-    let Result=await DeleteService(req,DataModel);
-    res.status(200).json(Result)
-}
+exports.DeleteExpense = async (req, res) => {
+    try {
+      const result = await DeleteService(req, DataModel); // Assuming DataModel is defined elsewhere
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  }
 
 

@@ -17,9 +17,14 @@ exports.ReturnsList=async (req, res) => {
     res.status(200).json(Result)
 }
 
-exports.ReturnDelete=async (req, res) => {
-    let Result=await  DeleteParentChildsService(req,res,ParentModel,ChildsModel,'ReturnID')
-    res.status(200).json(Result)
-}
+exports.ReturnDelete = async (req, res) => {
+    try {
+      // Call DeleteParentChildsService function with appropriate parameters
+      let Result = await DeleteParentChildsService(req, res, ParentModel, ChildsModel, 'ReturnID');
+      res.status(200).json(Result);
+    } catch (error) {
+      res.status(500).json({ status: "error", message: "Internal Server Error" });
+    }
+  }
 
 
