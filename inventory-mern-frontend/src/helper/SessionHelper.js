@@ -9,9 +9,15 @@ class SessionHelper{
         localStorage.setItem("UserDetails",JSON.stringify(UserDetails))
     }
 
-    getUserDetails(){
-        return JSON.parse(localStorage.getItem("UserDetails"))
-    }
+    getUserDetails() {
+  const userDetails = localStorage.getItem("UserDetails");
+  try {
+    return JSON.parse(userDetails);
+  } catch (error) {
+    console.error("Error parsing user details:", error);
+    return null; // or return an empty object, depending on your requirements
+  }
+}
 
     setEmail(Email){
         localStorage.setItem("Email",Email)

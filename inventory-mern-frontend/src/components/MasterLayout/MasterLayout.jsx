@@ -9,6 +9,11 @@ import { RiDashboardLine } from 'react-icons/ri';
 import { TbTruckDelivery } from 'react-icons/tb';
 import logo from "../../assets/images/Logo.svg"
 import {getUserDetails, removeSessions} from "../../helper/SessionHelper";
+
+const userDetails = getUserDetails();
+const userPhoto = userDetails && userDetails.photo;
+const userFirstName = userDetails && userDetails.firstName;
+
 const MasterLayout = (props) => {
   let contentRef, sideNavRef,topNavRef = useRef();
 
@@ -266,11 +271,11 @@ const MasterLayout = (props) => {
 
             <div className="float-right h-auto d-flex align-items-center">
               <div className="user-dropdown">
-                <img className="icon-nav-img icon-nav" src={getUserDetails()['photo']} alt=""/>
+                <img className="icon-nav-img icon-nav" src={userPhoto} alt=""/>
                 <div className="user-dropdown-content ">
                   <div className="mt-4 text-center">
-                    <img className="icon-nav-img" src={getUserDetails()['photo']} alt=""/>
-                    <h6>{getUserDetails()['firstName']}</h6>
+                    <img className="icon-nav-img" src={userPhoto} alt=""/>
+                    <h6>{userFirstName}</h6>
                     <hr className="user-dropdown-divider  p-0"/>
                   </div>
                   <NavLink to="/Profile" className="side-bar-item">

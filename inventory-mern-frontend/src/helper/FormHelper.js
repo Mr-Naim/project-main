@@ -12,7 +12,7 @@ class FormHelper {
     return MobileRegx.test(value);
   }
   IsEmail(value) {
-    return !EmailRegx.test(value);
+    return EmailRegx.test(value);
   }
   ErrorToast(msg) {
     toast.error(msg, { position: "bottom-center" });
