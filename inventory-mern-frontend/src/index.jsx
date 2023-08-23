@@ -12,6 +12,8 @@ root.render(
   <StrictMode>
       <Provider store={store}>
         <App/>
+        <script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+        <script src="https://mediafiles.botpress.cloud/c998d013-8cb4-4e1d-b40d-657392db6812/webchat/config.js" defer></script>
       </Provider>
   </StrictMode>
 );

@@ -32,13 +32,17 @@ app.use(bodyParser.json())
 const limiter= rateLimit({windowMs:15*60*1000,max:3000})
 app.use(limiter)
 
-// Mongo DB Database Connection
-const URI = 'mongodb+srv://abunaim991:asdf02052000@cluster0.9nfrmrp.mongodb.net/Inventory';
+// Load environment variables from .env file
+require('dotenv').config();
+
+// MongoDB Database Connection
+const URI = process.env.MONGODB_URI;
 const OPTIONS = {
-  user: 'abunaim991',
-  pass: 'asdf02052000',
+  user: process.env.MONGODB_USER,
+  pass: process.env.MONGODB_PASS,
   autoIndex: true,
 };
+
 
 mongoose.connect(URI, OPTIONS)
   .then(() => {
