@@ -10,14 +10,14 @@ const SendOTP = () => {
 
     const VerifyEmail=async () => {
         let email = emailRef.value;
-        if (IsEmail(email)) {
-            ErrorToast("Valid Email Address Required !")
+        if (!IsEmail(email)) {
+            ErrorToast("Valid Email Address Required !");
         } else {
-            let result = await RecoverVerifyEmailRequest(email)
+            let result = await RecoverVerifyEmailRequest(email);
             if (result === true) {
-                navigate("/VerifyOTP")
+                navigate("/VerifyOTP");
             }
-        }
+        }        
     }
 
     return (
