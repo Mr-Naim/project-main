@@ -1,1 +1,2 @@
-export const BaseURL="https://inventory-q60u.onrender.com/api/v1";
+//<<<<<<< HEAD
+export const BaseURL="https://localhost:5050/api/v1";
